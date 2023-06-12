@@ -1,3 +1,4 @@
+#pragma once
 #include <Windows.h>
 
 DWORD GetProcAddressRemote(HANDLE hProc, const char *moduleName, const char *exportName)
