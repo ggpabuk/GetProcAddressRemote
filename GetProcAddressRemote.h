@@ -1,14 +1,14 @@
 #pragma once
 #include <Windows.h>
 
-DWORD GetProcAddressRemote(HANDLE hProc, const char *moduleName, const char *exportName)
+DWORD GetProcAddressRemote32(HANDLE hProc, const char *moduleName, const char *exportName)
 {
     DWORD res = 0;
 
     DWORD modulesCount = 0;
     HMODULE hModules[1024] = { 0 };
 
-    BOOL istatus = K32EnumProcessModulesEx(hProc, hModules, sizeof hModules, &modulesCount, LIST_MODULES_ALL);
+    BOOL istatus = K32EnumProcessModulesEx(hProc, hModules, sizeof hModules, &modulesCount, LIST_MODULES_32BIT);
 
     if (!istatus)
     {
