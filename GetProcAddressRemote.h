@@ -15,8 +15,10 @@ DWORD GetProcAddressRemote32(HANDLE hProc, const char *moduleName, const char *e
         return 0;
     }
 
-    for (const auto &hModule : hModules)
+    for (DWORD i = 0; i < modulesCount; ++i)
     {
+        const HMODULE &hModule = hModules[i];
+        
         char modulepath[MAX_PATH] = { 0 };
         K32GetModuleFileNameExA(hProc, hModule, modulepath, sizeof modulepath);
         if (strcmp(modulepath + strlen(modulepath) - strlen(moduleName), moduleName))
