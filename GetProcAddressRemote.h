@@ -1,5 +1,7 @@
 #pragma once
 #include <Windows.h>
+#include <stdio.h>
+#include <Psapi.h>
 
 DWORD GetProcAddressRemote32(HANDLE hProc, const char *moduleName, const char *exportName)
 {
