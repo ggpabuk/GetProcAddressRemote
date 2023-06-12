@@ -55,20 +55,20 @@ DWORD GetProcAddressRemote(HANDLE hProc, const char *moduleName, const char *exp
         {
             auto szName = (char *)(image + *pNameOffset);
             
-            if (!strcmp(szName, exportName))
-            {
-                auto pNameOrdinal = (WORD *)(image + exportsTable->AddressOfNameOrdinals) + i;
-                res = *((DWORD *)(image + exportsTable->AddressOfFunctions) + *pNameOrdinal);
-                res += (DWORD)moduleInfo.lpBaseOfDll;
-            }
-            else
+            if (strcmp(szName, exportName))
             {
                 continue;
             }
 
+            auto pNameOrdinal = (WORD *)(image + exportsTable->AddressOfNameOrdinals) + i;
+            res = *((DWORD *)(image + exportsTable->AddressOfFunctions) + *pNameOrdinal);
+            res += (DWORD)moduleInfo.lpBaseOfDll;
+
 #if _DEBUG
             printf("[%lu] %s\n", i, szName);
 #endif
+            
+            break;
         }
 
         delete[] image;
