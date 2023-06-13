@@ -80,6 +80,5 @@ DWORD GetProcAddressRemote32(HANDLE hProc, const char *moduleName, const char *e
         delete[] image;
     }
 
-    CloseHandle(hProc);
     return res;
 }
