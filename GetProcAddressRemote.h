@@ -50,6 +50,7 @@ DWORD GetProcAddressRemote32(HANDLE hProc, const char *moduleName, const char *e
         IMAGE_DATA_DIRECTORY exportsDataDirectory = pNtHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT];
         if (exportsDataDirectory.Size <= 0)
         {
+            delete[] image;
             return 0;
         }
 
